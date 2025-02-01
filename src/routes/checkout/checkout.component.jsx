@@ -1,11 +1,16 @@
 import React, {useContext} from "react";
 import {CartContext} from "../../context/cart-context";
-import {Link} from "react-router-dom";
 import Button from "../../components/button/button.component";
+import "./checkout.styles.scss";
+import {useNavigate} from "react-router-dom";
 
 const Checkout = () => {
     const {cartItems, addItemToCart, removeItemFromCart} =
         useContext(CartContext);
+
+    const navigate = useNavigate();
+
+    const goToShopHandler = () => navigate("/shop");
 
     return (
         <div className="cart-items">
@@ -42,9 +47,7 @@ const Checkout = () => {
             ) : (
                 <div>
                     No items in cart
-                    <Link to="/shop">
-                        <Button>Go to shop</Button>
-                    </Link>
+                    <Button onClick={goToShopHandler}>Go to shop</Button>
                 </div>
             )}
         </div>
