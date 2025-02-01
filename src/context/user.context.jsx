@@ -12,6 +12,7 @@ export const UserProvider = ({ children }) => {
   const value = { currentUser, setCurrentUser };
 
   useEffect(() => {
+    // check for auth changes and update the user state
     const unsubscribe = onAuthStateChangedListener((user)=> {
       console.log({user});
       if(user) {
@@ -19,6 +20,7 @@ export const UserProvider = ({ children }) => {
       }
       setCurrentUser(user)
     })
+    // end listener
     return unsubscribe
 
   },[])
