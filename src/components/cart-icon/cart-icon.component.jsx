@@ -6,7 +6,6 @@ import "./cart-icon.styles.scss";
 const CartIcon = () => {
     const {isCartOpen, setIsCartOpen, cartCount} = useContext(CartContext);
     const toggleDropdown = () => {
-        console.log("click", isCartOpen);
         setIsCartOpen(!isCartOpen);
     };
 
