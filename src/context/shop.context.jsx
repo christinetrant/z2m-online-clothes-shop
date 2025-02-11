@@ -1,15 +1,32 @@
-import { createContext, useState } from "react";
+import {createContext, useEffect, useState} from "react";
+import {getCategoriesAndDocuments} from "../utils/firebase/firebase.utils";
+// import SHOP_DATA from "../data/shop-data";
+// import {addCollectionAndDocuments} from "../utils/firebase/firebase.utils";
 
-import PRODUCTS from "../shop-data.json";
+export const CategoriesContext = createContext({
+    categories: {},
+});
 
-export const ProductsContext = createContext({
-  products: [],
-})
+export const CategoriesProvider = ({children}) => {
+    const [categories, setCategories] = useState({});
 
-export const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState(PRODUCTS);
+    const value = {categories, setCategories};
 
-  const value = { products, setProducts };
+    // Only need this once to add categories to collection - in real world we'd delete so it can't accidentally be uncommented but for learning keeping it here
+    // useEffect(() => {
+    //     addCollectionAndDocuments("categories", SHOP_DATA);
+    // }, []);
 
-  return <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>
-}
+    useEffect(() => {
+        const getCategoryMap = async () => {
+            await getCategoriesAndDocuments();
+        };
+        getCategoryMap();
+    }, []);
+
+    return (
+        <CategoriesContext.Provider value={value}>
+            {children}
+        </CategoriesContext.Provider>
+    );
+};
