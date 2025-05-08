@@ -4,7 +4,7 @@ import {signOutUser} from "../../utils/firebase/firebase.utils";
 import {UserContext} from "../../context/user.context";
 import {ReactComponent as Logo} from "../../assets/crown.svg";
 import "./navigation.style.scss";
-import {CartContext} from "../../context/cart-context";
+import {CartContext} from "../../context/cart.context";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
