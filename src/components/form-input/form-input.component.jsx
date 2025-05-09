@@ -1,15 +1,20 @@
-import './form-input.styles.scss'
+import { FormInputStyles } from "./form-input.styles.jsx";
 
-const FormInput = ({label, inputOptions}) => {
-  return (
-    <div className="group">
-      <input className='form-input' {...inputOptions} />
+const FormInput = ({ label, inputOptions }) => {
+	return (
+		<FormInputStyles>
+			<input className="form-input" {...inputOptions} />
 
-      {label && (
-        <label className={`${inputOptions.value.length ? 'shrink' : ''} form-input-label`}>{label}</label>
-      )}
-    </div>
-  )
-}
+			{label && (
+				<label
+					className="form-input-label"
+					shrink={inputOptions.value.length ? "shrink" : ""}
+				>
+					{label}
+				</label>
+			)}
+		</FormInputStyles>
+	);
+};
 
-export default FormInput
+export default FormInput;

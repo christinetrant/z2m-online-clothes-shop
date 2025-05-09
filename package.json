@@ -19,6 +19,7 @@
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
     "sass": "^1.81.1",
+    "styled-components": "^6.1.18",
     "web-vitals": "^2.1.4"
   },
   "eslintConfig": {

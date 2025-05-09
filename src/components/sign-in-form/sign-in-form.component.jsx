@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { signInAuthWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { auth, signInWithGooglePopup, signInWithGoogleRedirect, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
-import "./sign-in-form.styles.scss";
+import { ButtonsContainerStyles } from "./sign-in-form.styles.jsx";
 
 /**
  * test@gmail.com
@@ -92,12 +92,12 @@ const SignInForm = () => {
 					}}
 				/>
 
-				<div className="buttons-container">
+				<ButtonsContainerStyles>
 					<Button type="submit">Submit</Button>
-					<Button type="button" buttonType="google" onClick={logGoogleUser}>
+					<Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={logGoogleUser}>
 						Google Sign In
 					</Button>
-				</div>
+				</ButtonsContainerStyles>
 			</form>
 		</div>
 	);
