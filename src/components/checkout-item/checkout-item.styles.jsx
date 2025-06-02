@@ -1,32 +1,44 @@
 import styled from "styled-components";
+
 export const CheckoutItemContainerStyles = styled.div`
-	width: 55%;
-	min-height: 90vh;
+	width: 100%;
 	display: flex;
-	flex-direction: column;
+	min-height: 100px;
+	border-bottom: 1px solid darkgrey;
+	padding: 15px 0;
+	font-size: 20px;
 	align-items: center;
-	margin: 50px auto 0;
 
-	.checkout-header {
-		width: 100%;
-		padding: 10px 0;
-		display: flex;
-		justify-content: space-between;
-		border-bottom: 1px solid darkgrey;
+	.image-container {
+		width: 23%;
+		padding-right: 15px;
 
-		.header-block {
-			text-transform: capitalize;
-			width: 23%;
-
-			&:last-child {
-				width: 8%;
-			}
+		img {
+			width: 100%;
+			height: 100%;
 		}
 	}
 
-	.total {
-		margin-top: 30px;
-		margin-left: auto;
-		font-size: 36px;
+	.name,
+	.quantity,
+	.price {
+		width: 23%;
+	}
+
+	.quantity {
+		display: flex;
+
+		.arrow {
+			cursor: pointer;
+		}
+
+		.value {
+			margin: 0 10px;
+		}
+	}
+
+	.remove-button {
+		padding-left: 12px;
+		cursor: pointer;
 	}
 `;

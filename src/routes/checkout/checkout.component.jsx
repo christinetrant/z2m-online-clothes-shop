@@ -3,7 +3,7 @@ import { CartContext } from "../../context/cart.context";
 import { useNavigate } from "react-router-dom";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import Button from "../../components/button/button.component";
-import { CheckoutContainer } from "./checkout.styles";
+import { CheckoutContainerStyles } from "./checkout.styles";
 
 const Checkout = () => {
 	const { cartItems, cartTotal } = useContext(CartContext);
@@ -13,7 +13,7 @@ const Checkout = () => {
 	const goToShopHandler = () => navigate("/shop");
 
 	return (
-		<CheckoutContainer>
+		<CheckoutContainerStyles>
 			{cartItems.length ? (
 				<>
 					<div className="checkout-header">
@@ -36,7 +36,7 @@ const Checkout = () => {
 					<Button onClick={goToShopHandler}>Go to shop</Button>
 				</div>
 			)}
-		</CheckoutContainer>
+		</CheckoutContainerStyles>
 	);
 };
 
