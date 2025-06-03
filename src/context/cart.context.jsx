@@ -1,4 +1,5 @@
 import { createContext, useEffect, useReducer, useState } from "react";
+import { createAction } from "../utils/helpers/reducer.utils";
 
 const addCartItem = (cartItems, selectedProduct) => {
 	// find if cartItems contain selectedProduct
@@ -81,7 +82,8 @@ export const CartProvider = ({ children }) => {
 	const { isCartOpen, cartItems, cartCount, cartTotal } = state;
 
 	const setIsCartOpen = (bool) => {
-		dispatch({ type: CART_ACTION_TYPES.SET_IS_CART_OPEN, payload: bool });
+		// dispatch({ type: CART_ACTION_TYPES.SET_IS_CART_OPEN, payload: bool });
+		dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, bool));
 	};
 
 	const updateCartItemsReducer = (newCartItems) => {
@@ -94,7 +96,8 @@ export const CartProvider = ({ children }) => {
 			cartTotal: newCartTotal,
 		};
 
-		dispatch({ type: CART_ACTION_TYPES.SET_CART_ITEMS, payload: updatedCartItems });
+		// dispatch({ type: CART_ACTION_TYPES.SET_CART_ITEMS, payload: updatedCartItems });
+		dispatch(createAction(CART_ACTION_TYPES.SET_CART_ITEMS, updatedCartItems));
 	};
 
 	// These are no longer needed now we are using reducers
