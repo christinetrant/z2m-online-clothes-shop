@@ -1,5 +1,5 @@
 import { createContext, useEffect, useReducer, useState } from "react";
-import { createAction } from "../utils/helpers/reducer.utils";
+import { createAction } from "../utils/reducers/reducer.utils";
 
 const addCartItem = (cartItems, selectedProduct) => {
 	// find if cartItems contain selectedProduct

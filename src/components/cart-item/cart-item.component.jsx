@@ -1,6 +1,7 @@
 import { CartItemContainer } from "./cart-item.styles.jsx";
 
 const CartItem = ({ item }) => {
+	console.log("🚀 ~ CartItem ~ item:", item);
 	const { imageUrl, price, name, quantity } = item;
 
 	return (
