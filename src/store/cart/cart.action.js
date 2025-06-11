@@ -37,7 +37,6 @@ export const addItemToCart = (cartItems, product) => {
 
 export const decreaseItemFromCart = (cartItems, product) => {
 	const newCartItems = decreaseCartItem(cartItems, product);
-	console.log("🚀 ~ decreaseItemFromCart ~ newCartItems:", newCartItems);
 	return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 };
 

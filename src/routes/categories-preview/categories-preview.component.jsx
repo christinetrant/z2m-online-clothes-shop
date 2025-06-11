@@ -7,7 +7,6 @@ import { selectCategoriesMap } from "../../store/categories/categories.selector"
 const CategoriesPreview = ({ title, products }) => {
 	// const { categoriesMap } = useContext(CategoriesContext);
 	const categoriesMap = useSelector(selectCategoriesMap);
-	console.log("🚀 ~ CategoriesPreview ~ categoriesMap:", categoriesMap);
 
 	return (
 		<>
