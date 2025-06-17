@@ -2,6 +2,7 @@ import { compose, legacy_createStore as createStore, applyMiddleware } from "red
 import { logger } from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { thunk } from "redux-thunk";
 
 // Root Reducer contains all the reducers needed to create the store
 import { rootReducer } from "./root-reducer";
@@ -34,8 +35,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Library helpers that run the items in the array before an action hits the reducer
 // Only use when in development, if not in development, filter out the logger so it doesn't pass false to the applyMiddleware function
 const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(Boolean);
+
+const composeEnhancer = (process.env.NODE_ENV !== "production" && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
 // In order for the middleware to work, we need to apply the middleware
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+// const composedEnhancers = compose(applyMiddleware(...middleWares));
+// To use Redux DevTools, we need to use the composeEnhancer function
+const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
 // middleware needs to be applied to the store as the third argument but we don't have a second so pass in undefined
 // export const store = createStore(rootReducer, undefined, composedEnhancers);
