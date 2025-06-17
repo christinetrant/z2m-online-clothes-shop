@@ -3,19 +3,23 @@ import CategoriesPreview from "../categories-preview/categories-preview.componen
 import Category from "../category/category.component";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { setCategoriesMap, fetchCategoriesAsync } from "../../store/categories/categories.action";
+import { setCategoriesMap, fetchCategoriesAsync, fetchCategoriesStart } from "../../store/categories/categories.action";
 import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
 
 const Shop = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(fetchCategoriesAsync());
-		// const getCategoriesMap = async () => {
-		// const categories = await getCategoriesAndDocuments("categories");
-		// dispatch(setCategoriesMap(categories));
-		// };
+		// using the thunk action creator
+		// dispatch(fetchCategoriesAsync());
+		// original code
+		// // const getCategoriesMap = async () => {
+		// // const categories = await getCategoriesAndDocuments("categories");
+		// // dispatch(setCategoriesMap(categories));
+		// // };
 
-		// getCategoriesMap();
+		// // getCategoriesMap();
+		// Using saga we don't need to use the above code
+		dispatch(fetchCategoriesStart());
 	}, [dispatch]);
 
 	return (
