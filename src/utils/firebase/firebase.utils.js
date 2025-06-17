@@ -65,7 +65,9 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
 			console.log("error creating the user", error.message);
 		}
 	}
-	return userDocRef;
+	// return userDocRef;
+	// For sage - we need to return the snapshot
+	return userSnapshot;
 };
 
 export const createAuthUserFromEmailAndPassword = async (email, password) => {
@@ -89,6 +91,21 @@ export const signOutUser = async () => await signOut(auth);
 
 // listen to changes in the auth state
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+// Using saga we need to have a promise that is a single check, rather than having it in App.js
+export const getCurrentUser = () => {
+	return new Promise((resolve, reject) => {
+		const unsubscribe = onAuthStateChanged(
+			auth,
+			(userAuth) => {
+				// unsibscribe to remove memory leak
+				unsubscribe();
+				resolve(userAuth);
+			},
+			reject
+		);
+	});
+};
 
 // Quick way to import products to database - use just once then comment out!
 // export const addCollectionAndDocuments = async (
