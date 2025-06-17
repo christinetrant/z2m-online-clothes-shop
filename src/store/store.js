@@ -32,9 +32,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // };
 // const middleWares = [loggerMiddleWare];
 
-// Library helpers that run the items in the array before an action hits the reducer
+// Library helpers that run the items in the array before an action hits the reducer (logger & thunk)
 // Only use when in development, if not in development, filter out the logger so it doesn't pass false to the applyMiddleware function
-const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(Boolean);
+const middleWares = [process.env.NODE_ENV !== "production" && logger, thunk].filter(Boolean);
 
 const composeEnhancer = (process.env.NODE_ENV !== "production" && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
