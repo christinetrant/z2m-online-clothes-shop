@@ -7,11 +7,13 @@ import { thunk } from "redux-thunk";
 // Root Reducer contains all the reducers needed to create the store
 import { rootReducer } from "./root-reducer";
 
-// Create a config for redux persist, as user is done via firebase we can blacklist the user reducer
+// Create a config for redux persist, as user is done via firebase we can blacklist the user reducer,
+// but more useful is to just whitelist cart as that's the only reducer we want, as category now has an isLoading state from redux-thunk
 const persistConfig = {
 	key: "root",
 	storage,
-	blacklist: ["user"],
+	// blacklist: ["user"],
+	whitelist: ["cart"],
 };
 // Create a persisted reducer using the config and root reducer which can be used in store
 const persistedReducer = persistReducer(persistConfig, rootReducer);
