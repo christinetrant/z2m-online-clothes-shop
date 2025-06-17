@@ -14,8 +14,8 @@ export const fetchCategoriesAsync = () => async (dispatch) => {
 	// As soon as function runs we want to run the fetchCategoriesStart action to set isLoading to true
 	dispatch(fetchCategoriesStart());
 	try {
-		const categoriesArray = await getCategoriesAndDocuments("categories");
-		dispatch(fetchCategoriesSuccess(categoriesArray));
+		const categories = await getCategoriesAndDocuments("categories");
+		dispatch(fetchCategoriesSuccess(categories));
 	} catch (error) {
 		dispatch(fetchCategoriesFailed(error));
 	}

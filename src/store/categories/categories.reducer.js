@@ -16,6 +16,7 @@ export const categoriesReducer = (state = CATEGORIES_INITIAL_STATE, action = {})
 		case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS:
 			return {
 				...state,
+				isLoading: false,
 				categories: payload,
 			};
 		case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START:
