@@ -9,6 +9,7 @@ import { createUserDocumentFromAuth, onAuthStateChangedListener } from "./utils/
 // import { setCurrentUser } from "./store/user/user.action";
 import { setCurrentUser } from "./store/user/user.reducer";
 import { useDispatch } from "react-redux";
+import { revokeAccessToken } from "firebase/auth";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -20,7 +21,10 @@ const App = () => {
 			if (user) {
 				createUserDocumentFromAuth(user);
 			}
-			dispatch(setCurrentUser(user));
+			const pickedUser = user && (({ accessToken, email }) => ({ accessToken, email }))(user);
+			// dispatch(setCurrentUser(user));
+			// To prevent serialize errors from redux toolkit, we need to pick the user object to only include the properties we want
+			dispatch(setCurrentUser(pickedUser));
 		});
 		// end listener
 		return unsubscribe;

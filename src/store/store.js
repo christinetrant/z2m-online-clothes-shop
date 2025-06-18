@@ -43,7 +43,11 @@ const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(Boo
 // export const store = createStore(persistedReducer, undefined, composedEnhancers);
 export const store = configureStore({
 	reducer: rootReducer,
-	// middleware:
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(middleWares),
+		// {
+		// serializableCheck: false,
+		// }
 });
 // // Export out a perisitor object which calls persist store using the store object.
 // export const persistor = persistStore(store);
