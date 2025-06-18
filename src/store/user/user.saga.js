@@ -1,7 +1,7 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import USER_ACTION_TYPES from "./user.types";
-import { createAuthUserFromEmailAndPassword, createUserDocumentFromAuth, getCurrentUser, signInAuthWithEmailAndPassword, signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
-import { signInFailed, signInSuccess, signUpFailed, signUpSuccess } from "./user.action";
+import { createAuthUserFromEmailAndPassword, createUserDocumentFromAuth, getCurrentUser, signInAuthWithEmailAndPassword, signInWithGooglePopup, signOutUser } from "../../utils/firebase/firebase.utils";
+import { signInFailed, signInSuccess, signOutFailed, signOutSuccess, signUpFailed, signUpSuccess } from "./user.action";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
 	try {
@@ -43,6 +43,15 @@ export function* isUserAuthenticated() {
 	}
 }
 
+export function* signOut() {
+	try {
+		yield call(signOutUser);
+		yield put(signOutSuccess());
+	} catch (error) {
+		yield put(signOutFailed(error));
+	}
+}
+
 export function* signUp({ payload: { email, password, displayName } }) {
 	try {
 		const { user } = yield call(createAuthUserFromEmailAndPassword, email, password);
@@ -78,7 +87,11 @@ export function* onSignUpSuccess() {
 	yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
+export function* onSignOutStart() {
+	yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
+}
+
 // This is essentially an accumulator that holds all the sagas for category
 export function* userSaga() {
-	yield all([call(onCheckUserSession), call(onGoogleSignInStart), call(onEmailSignInStart), call(onSignUpStart), call(onSignUpSuccess)]);
+	yield all([call(onCheckUserSession), call(onGoogleSignInStart), call(onEmailSignInStart), call(onSignUpStart), call(onSignUpSuccess), call(onSignOutStart)]);
 }
