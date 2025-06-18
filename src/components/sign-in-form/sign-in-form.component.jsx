@@ -4,6 +4,8 @@ import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { auth, signInWithGooglePopup, signInWithGoogleRedirect, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import { ButtonsContainerStyles } from "./sign-in-form.styles.jsx";
+import { useDispatch } from "react-redux";
+import { googleSignInStart } from "../../store/user/user.action.js";
 
 /**
  * test@gmail.com
@@ -18,6 +20,7 @@ const SignInForm = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { email, password } = formFields;
 	// const { setCurrentUser } = useContext(UserContext);
+	const dispatch = useDispatch();
 
 	const resetFormFields = () => {
 		setFormFields(defaultFormFields);
@@ -56,14 +59,17 @@ const SignInForm = () => {
 		setFormFields({ ...formFields, [name]: value });
 	};
 
-	const logGoogleUser = async () => {
-		// We want response.user
-		// const { user } = await signInWithGooglePopup();
-		await signInWithGooglePopup();
+	// const signInWithGoogle = async () => {
+	// 	// We want response.user
+	// 	// const { user } = await signInWithGooglePopup();
+	// 	await signInWithGooglePopup();
 
-		// const userDocRef = await createUserDocumentFromAuth(user);
-		// console.log("🚀 ~ logGoogleUser ~ response:", user);
-		// setCurrentUser(user);
+	// 	// const userDocRef = await createUserDocumentFromAuth(user);
+	// 	// console.log("🚀 ~ logGoogleUser ~ response:", user);
+	// 	// setCurrentUser(user);
+	// };
+	const signInWithGoogle = async () => {
+		dispatch(googleSignInStart());
 	};
 
 	return (
@@ -94,7 +100,7 @@ const SignInForm = () => {
 
 				<ButtonsContainerStyles>
 					<Button type="submit">Submit</Button>
-					<Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={logGoogleUser}>
+					<Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>
 						Google Sign In
 					</Button>
 				</ButtonsContainerStyles>
