@@ -5,7 +5,7 @@ import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { auth, signInWithGooglePopup, signInWithGoogleRedirect, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import { ButtonsContainerStyles } from "./sign-in-form.styles.jsx";
 import { useDispatch } from "react-redux";
-import { googleSignInStart } from "../../store/user/user.action.js";
+import { emailSignInStart, googleSignInStart } from "../../store/user/user.action.js";
 
 /**
  * test@gmail.com
@@ -37,7 +37,9 @@ const SignInForm = () => {
 		}
 
 		try {
-			const response = await signInAuthWithEmailAndPassword(email, password);
+			// const response = await signInAuthWithEmailAndPassword(email, password);
+			// Use saga
+			dispatch(emailSignInStart(email, password));
 			// console.log(response);
 
 			// setCurrentUser(response);

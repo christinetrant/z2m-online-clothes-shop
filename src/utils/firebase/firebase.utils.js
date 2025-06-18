@@ -80,8 +80,12 @@ export const signInAuthWithEmailAndPassword = async (email, password) => {
 	if (!email || !password) return;
 	try {
 		const userCredentials = await signInWithEmailAndPassword(auth, email, password);
-		const user = userCredentials.user;
-		return user;
+		// console.log("🚀 ~ signInAuthWithEmailAndPassword ~ userCredentials:", userCredentials);
+		// const user = userCredentials.user;
+		// console.log("🚀 ~ signInAuthWithEmailAndPassword ~ user:", user);
+		// return user;
+		// Using saga, we return the whole state
+		return userCredentials;
 	} catch (error) {
 		console.log("error signing in", error.message);
 	}
