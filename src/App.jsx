@@ -9,7 +9,6 @@ import { createUserDocumentFromAuth, onAuthStateChangedListener } from "./utils/
 // import { setCurrentUser } from "./store/user/user.action";
 import { setCurrentUser } from "./store/user/user.reducer";
 import { useDispatch } from "react-redux";
-import { revokeAccessToken } from "firebase/auth";
 
 const App = () => {
 	const dispatch = useDispatch();

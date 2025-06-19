@@ -5,7 +5,8 @@ import { CartDropdownContainerStyles } from "./cart-dropdown.styles.jsx";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart.selector.js";
-import { setIsCartOpen } from "../../store/cart/cart.action.js";
+// import { setIsCartOpen } from "../../store/cart/cart.action.js";
+import { setIsCartOpen } from "../../store/cart/cart.reducer.js";
 
 const CartDropdown = () => {
 	// const { cartItems } = useContext(CartContext);
