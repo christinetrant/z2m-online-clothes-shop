@@ -1,8 +1,4 @@
-import {
-	BaseButtonStyles,
-	GoogleSignInButtonStyles,
-	InvertedButtonStyles,
-} from "./button.styles.jsx";
+import { BaseButtonStyles, ButtonSpinner, GoogleSignInButtonStyles, InvertedButtonStyles } from "./button.styles.jsx";
 
 export const BUTTON_TYPE_CLASSES = {
 	base: "base",
@@ -21,14 +17,15 @@ const getButtonStyle = (buttonType = BUTTON_TYPE_CLASSES.base) => {
 	}
 };
 
-const Button = ({ children, buttonType = "default", ...otherProps }) => {
+const Button = ({ children, buttonType = "default", isLoading, ...otherProps }) => {
 	const ButtonStyle = getButtonStyle(buttonType);
 	return (
 		<ButtonStyle
 			// className={`button-container ${BUTTON_TYPE_CLASSES[buttonType]}`}
+			disabled={isLoading}
 			{...otherProps}
 		>
-			{children}
+			{isLoading ? <ButtonSpinner /> : children}
 		</ButtonStyle>
 	);
 };
