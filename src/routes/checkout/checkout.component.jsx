@@ -1,11 +1,12 @@
 import React from "react";
 // import { CartContext } from "../../context/cart.context";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCartItems, selectCartTotal } from "../../store/cart/cart.selector";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import PaymentForm from "../../components/payment-form/payment-form.component";
 import Button from "../../components/button/button.component";
 import { CheckoutContainerStyles } from "./checkout.styles";
-import { selectCartItems, selectCartTotal } from "../../store/cart/cart.selector";
-import { useSelector } from "react-redux";
 
 const Checkout = () => {
 	// const { cartItems, cartTotal } = useContext(CartContext);
@@ -40,6 +41,7 @@ const Checkout = () => {
 					<Button onClick={goToShopHandler}>Go to shop</Button>
 				</div>
 			)}
+			<PaymentForm />
 		</CheckoutContainerStyles>
 	);
 };
